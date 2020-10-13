@@ -1,21 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {createStore} from 'redux'
 import { Provider } from 'react-redux'
-import {Route, Router} from 'react-router-dom'
+import {BrowserRouter, Route,  Switch} from 'react-router-dom'
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import products from './reducers/products';
-import Product from './pages/product'
 import Cart from './pages/cart';
+import Product from './pages/product'
+import store from './store/store'
+import Navbar from './Navbar';
 
-const store = createStore(products)
+console.log(store)
+
 ReactDOM.render(
   <Provider store={store}>
-    <Router >
+    
+    <BrowserRouter >
+      <Navbar />
+      <Switch>
       <Route exact path={'/'} component ={Product}/>
-      <Route  path={'/cart'} component ={Cart}/>
-  </Router>
+      <Route path={'/cart'} component ={Cart}/>
+      </Switch>
+    </BrowserRouter>
+
   </Provider>,
   document.getElementById('root')
 );
